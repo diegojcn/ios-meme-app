@@ -64,7 +64,7 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <segue destination="BYZ-38-t0r" kind="presentation" identifier="editSegue" id="FLy-Fx-C3n"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="editSegue" id="FLy-Fx-C3n"/>
                     </connections>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="yem-aR-BXb" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -206,6 +206,7 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                         <constraints>
                                             <constraint firstItem="lvP-SX-HdD" firstAttribute="top" secondItem="4Ue-xy-mHZ" secondAttribute="top" constant="101" id="5Yu-vI-kSD"/>
+                                            <constraint firstItem="lvP-SX-HdD" firstAttribute="width" secondItem="4Ue-xy-mHZ" secondAttribute="width" id="6ek-UU-LSd"/>
                                             <constraint firstItem="IVn-cM-aBk" firstAttribute="top" secondItem="4Ue-xy-mHZ" secondAttribute="top" constant="444" id="778-JL-Ev9"/>
                                             <constraint firstAttribute="trailing" secondItem="PTF-sX-vVz" secondAttribute="trailing" id="FcS-lm-56R"/>
                                             <constraint firstItem="lvP-SX-HdD" firstAttribute="leading" secondItem="PTF-sX-vVz" secondAttribute="leading" id="Lzd-a6-iJG"/>
@@ -213,6 +214,7 @@
                                             <constraint firstItem="lvP-SX-HdD" firstAttribute="centerX" secondItem="IVn-cM-aBk" secondAttribute="centerX" id="VvG-h9-waV"/>
                                             <constraint firstItem="PTF-sX-vVz" firstAttribute="leading" secondItem="4Ue-xy-mHZ" secondAttribute="leading" id="c9B-dH-RJO"/>
                                             <constraint firstItem="lvP-SX-HdD" firstAttribute="leading" secondItem="IVn-cM-aBk" secondAttribute="leading" id="g1G-78-ULI"/>
+                                            <constraint firstItem="IVn-cM-aBk" firstAttribute="width" secondItem="PTF-sX-vVz" secondAttribute="width" id="l4W-qr-P0x"/>
                                             <constraint firstAttribute="bottom" secondItem="PTF-sX-vVz" secondAttribute="bottom" id="nPW-uC-3an"/>
                                             <constraint firstItem="PTF-sX-vVz" firstAttribute="top" secondItem="4Ue-xy-mHZ" secondAttribute="top" id="vlZ-Bw-Ra3"/>
                                         </constraints>
@@ -226,31 +228,38 @@
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="50"/>
                                         <subviews>
                                             <button opaque="NO" tag="1" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5L-gK-Sv5" userLabel="btnCamera">
-                                                <rect key="frame" x="0.0" y="0.0" width="94" height="50"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="75" height="50"/>
                                                 <state key="normal" image="camera"/>
                                                 <connections>
                                                     <action selector="pickOrChoosePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="6tQ-wc-TBv"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gLS-v9-B3z" userLabel="btnNew">
-                                                <rect key="frame" x="94" y="0.0" width="93.5" height="50"/>
+                                                <rect key="frame" x="75" y="0.0" width="75" height="50"/>
                                                 <state key="normal" image="share"/>
                                                 <connections>
                                                     <action selector="shareMeme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="WO2-MI-Rbc"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="F6D-4b-umb" userLabel="btnAlbum">
-                                                <rect key="frame" x="187.5" y="0.0" width="94" height="50"/>
+                                                <rect key="frame" x="150" y="0.0" width="75" height="50"/>
                                                 <state key="normal" image="pilha-de-fotos"/>
                                                 <connections>
                                                     <action selector="pickOrChoosePhoto:" destination="BYZ-38-t0r" eventType="touchUpInside" id="DBE-0l-guD"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="53U-VA-4mA" userLabel="btnClear">
-                                                <rect key="frame" x="281.5" y="0.0" width="93.5" height="50"/>
+                                                <rect key="frame" x="225" y="0.0" width="75" height="50"/>
                                                 <state key="normal" image="trash"/>
                                                 <connections>
                                                     <action selector="cleanMeme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="vdL-fa-jVK"/>
+                                                </connections>
+                                            </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xSa-DI-ht8" userLabel="btnEdit">
+                                                <rect key="frame" x="300" y="0.0" width="75" height="50"/>
+                                                <state key="normal" title="Edit"/>
+                                                <connections>
+                                                    <action selector="editMeme:" destination="BYZ-38-t0r" eventType="touchUpInside" id="eHU-4B-gF6"/>
                                                 </connections>
                                             </button>
                                         </subviews>
@@ -285,6 +294,7 @@
                         <connections>
                             <outlet property="albumBtn" destination="F6D-4b-umb" id="yX2-8k-9U4"/>
                             <outlet property="bottomText" destination="IVn-cM-aBk" id="KCK-jv-rb7"/>
+                            <outlet property="btnEdit" destination="xSa-DI-ht8" id="bwR-3H-dDG"/>
                             <outlet property="btnView" destination="aBe-mJ-VRY" id="eTF-w1-8n8"/>
                             <outlet property="cameraBtn" destination="Q5L-gK-Sv5" id="nXF-N6-0Mu"/>
                             <outlet property="imageView" destination="4Ue-xy-mHZ" id="Nua-4K-Phl"/>

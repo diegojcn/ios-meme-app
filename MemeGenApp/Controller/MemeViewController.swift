@@ -28,7 +28,7 @@ UINavigationControllerDelegate{
         if memeView  != nil {
             memeView.initializer(memeSelected: memeToEdit)
         }
-        
+       
     }
     override func viewWillAppear(_ animated: Bool) {
         subscribeToKeyboardNotifications()
@@ -120,10 +120,21 @@ UINavigationControllerDelegate{
         dismiss(animated: true, completion: nil)
     }
 
+    @IBAction func editMeme(_ sender: Any) {
+        
+        memeView.editMode(edit: true)
+        
+        
+    }
     
     @IBAction func cleanMeme(_ sender: Any) {
         
         self.memeView.initializer(memeSelected: nil)
+    }
+    
+    private func back() {
+        
+         self.navigationController?.popToRootViewController(animated: true)
     }
     
 
@@ -157,7 +168,7 @@ UINavigationControllerDelegate{
                     appDelegate.memes.append(meme)
                 }
                 
-                self.navigationController?.popViewController(animated: true)
+                self.back()
                 return
             }
         }

@@ -36,6 +36,13 @@ class MemeTableViewController : UITableViewController {
 
 extension MemeTableViewController {
     
+    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+        self.memeSelected = self.memes[(indexPath as NSIndexPath).row]
+        performSegue(withIdentifier: "editSegue", sender: nil)
+        
+    }
+    
     override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "TableViewCell")

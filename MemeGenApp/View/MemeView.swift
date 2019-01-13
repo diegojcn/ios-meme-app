@@ -29,10 +29,14 @@ class MemeView : UIView, UITextFieldDelegate{
     
     @IBOutlet weak var btnView: UIView!
     
+    @IBOutlet weak var btnEdit: UIButton!
+    
+    @IBOutlet weak var btnBack: UIButton!
+    
     var memedImage : UIImage!
     
     
-    let textDefault : String = "Digite o Texto"
+    let textDefault : String = "DIGITE O TEXTO"
     
     func initializer(memeSelected : Meme!){
         self.cameraBtn.isEnabled =  UIImagePickerController.isSourceTypeAvailable(.camera)
@@ -40,10 +44,14 @@ class MemeView : UIView, UITextFieldDelegate{
         self.topText.delegate = self
         self.bottomText.delegate = self
         
+        let paragraph = NSMutableParagraphStyle()
+        paragraph.alignment = .center
+        
         let memeTextAttributes = [
             NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
             NSAttributedStringKey.foregroundColor : UIColor.white,
             NSAttributedStringKey.strokeWidth : 0,
+            NSAttributedString.Key.paragraphStyle: paragraph,
             NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
             ] as! [String : Any]
         
@@ -51,12 +59,15 @@ class MemeView : UIView, UITextFieldDelegate{
         self.bottomText.defaultTextAttributes = memeTextAttributes
         
         if memeSelected != nil {
+            
             self.imagem.image = memeSelected.originalImagem.image
             self.memedImage = memeSelected.memedImage
             self.bottomText.text = memeSelected.bottomText
             self.topText.text = memeSelected.topText
             showTextFields(show: true)
             showButtons(show: true)
+            editMode(edit: false)
+            
         } else {
             
             self.topText.text = textDefault
@@ -67,7 +78,24 @@ class MemeView : UIView, UITextFieldDelegate{
             self.memedImage = nil
             showTextFields(show: false)
             showButtons(show: false)
+            editMode(edit: true)
             
+        }
+        
+    }
+    
+    func editMode(edit : Bool) {
+        
+        if !edit {
+            self.btnEdit.isHidden = false
+            self.bottomText.isEnabled = false
+            self.topText.isEnabled = false
+            
+        } else {
+            self.btnEdit.isHidden = true
+            self.bottomText.isEnabled = true
+            self.topText.isEnabled = true
+
         }
         
     }
@@ -81,11 +109,10 @@ class MemeView : UIView, UITextFieldDelegate{
             self.albumBtn.isHidden = true
         } else {
             self.shareBtn.isHidden = true
-             self.trashBtn.isHidden = true
+            self.trashBtn.isHidden = true
             self.cameraBtn.isHidden = false
             self.albumBtn.isHidden = false
         }
-        
         
     }
     
@@ -94,7 +121,6 @@ class MemeView : UIView, UITextFieldDelegate{
         if (textField.text?.elementsEqual(""))! {
            textField.text = textDefault
         }
-        
         
     }
     
