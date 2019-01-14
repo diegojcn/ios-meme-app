@@ -10,29 +10,30 @@ import UIKit
 
 class MemeViewController: UIViewController , UIImagePickerControllerDelegate,
 UINavigationControllerDelegate{
-
+    
     @IBOutlet var memeView: MemeView!
     
     let imagePicker = UIImagePickerController()
     
     var memeToEdit : Meme! = nil
-
+    
     override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
         unsubscribeFromKeyboardNotifications()
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         imagePicker.delegate = self
-
+        
         if memeView  != nil {
             memeView.initializer(memeSelected: memeToEdit)
         }
-       
+        
     }
     override func viewWillAppear(_ animated: Bool) {
         subscribeToKeyboardNotifications()
-
+        
     }
     
     func subscribeToKeyboardNotifications() {
@@ -45,9 +46,8 @@ UINavigationControllerDelegate{
     
     func unsubscribeFromKeyboardNotifications() {
         
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillShow, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillHide, object: nil)
-        NotificationCenter.default.removeObserver(self, name: .UIKeyboardWillChangeFrame, object: nil)
+        NotificationCenter.default.removeObserver(self)
+        
     }
     
     deinit {
@@ -55,10 +55,10 @@ UINavigationControllerDelegate{
     }
     
     
-
+    
     @objc func keyboardChange(_ notification:Notification) {
         view.frame.origin.y = 0
-        if(notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame ){
+        if notification.name == Notification.Name.UIKeyboardWillShow || notification.name == Notification.Name.UIKeyboardWillChangeFrame {
             
             if self.memeView.bottomText.isFirstResponder {
                 view.frame.origin.y -= getKeyboardHeight(notification)
@@ -81,9 +81,9 @@ UINavigationControllerDelegate{
     }
     
     func showToolBarAndNavBar(show: Bool){
-      
-        if(show){
-        self.navigationController?.setNavigationBarHidden(false, animated: false)
+        
+        if show {
+            self.navigationController?.setNavigationBarHidden(false, animated: false)
             memeView.showToolBar(show: true)
         } else {
             self.navigationController?.setNavigationBarHidden(true, animated: false)
@@ -108,7 +108,7 @@ UINavigationControllerDelegate{
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-    
+        
         if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
             
             self.memeView.imagem.image = image
@@ -146,7 +146,7 @@ UINavigationControllerDelegate{
     @IBAction func shareMeme(_ sender: UIButton){
         memeView.memedImage = generateMemedImage()
         let meme = Meme(topText: memeView.topText.text!, bottomText: memeView.bottomText.text!, originalImagem: memeView.imagem, memedImage: memeView.memedImage)
-       
+        
         let controller = UIActivityViewController(activityItems: [meme.memedImage], applicationActivities: nil)
         
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
@@ -166,7 +166,7 @@ UINavigationControllerDelegate{
             }
         }
         
-       self.present(controller, animated: true, completion: nil)
+        self.present(controller, animated: true, completion: nil)
         
         
     }
@@ -176,7 +176,7 @@ UINavigationControllerDelegate{
         let object = UIApplication.shared.delegate
         let appDelegate = object as! AppDelegate
         appDelegate.memes.append(meme)
-    
+        
     }
     
     

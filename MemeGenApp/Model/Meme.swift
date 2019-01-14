@@ -34,5 +34,5 @@ struct Meme {
     func memeText() -> String{
         return "\(topText) \(bottomText)"
     }
-
+    
 }

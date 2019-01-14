@@ -30,13 +30,13 @@ class MemeTableViewController : UITableViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
         if segue.identifier == "viewSegue" {
-        
+            
             let controller = segue.destination as! MemeDetailViewController
             controller.memeToEdit = self.memeSelected
             
         }
     }
-
+    
 }
 
 extension MemeTableViewController {

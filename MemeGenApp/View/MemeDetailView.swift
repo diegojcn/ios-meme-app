@@ -12,8 +12,6 @@ import UIKit
 class MemeDetailView : UIView {
     
     @IBOutlet weak var image: UIImageView!
-
-    @IBOutlet weak var btnBack: UIButton!
     
     @IBOutlet weak var btnEdit: UIButton!
     

@@ -57,7 +57,7 @@ class MemeView : UIView, UITextFieldDelegate{
         
         self.topText.defaultTextAttributes = attributes
         self.bottomText.defaultTextAttributes = attributes
-
+        
         if memeSelected != nil {
             
             self.imagem.image = memeSelected.originalImagem.image
@@ -134,7 +134,7 @@ class MemeView : UIView, UITextFieldDelegate{
         self.topText.resignFirstResponder()
         self.bottomText.resignFirstResponder()
     }
-   
+    
 }
 
 extension MemeView {

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 
 class MemeCollectionViewController: UICollectionViewController{
-
+    
     var memes = [Meme]()
     
     var memeSelected : Meme!
@@ -30,6 +30,7 @@ class MemeCollectionViewController: UICollectionViewController{
             controller.memeToEdit = self.memeSelected
             
         }
+        
     }
     
 }
@@ -37,6 +38,7 @@ class MemeCollectionViewController: UICollectionViewController{
 extension MemeCollectionViewController {
     
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         return memes.count
         
     }
