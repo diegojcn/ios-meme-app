@@ -119,13 +119,6 @@ UINavigationControllerDelegate{
         
         dismiss(animated: true, completion: nil)
     }
-
-    @IBAction func editMeme(_ sender: Any) {
-        
-        memeView.editMode(edit: true)
-        
-        
-    }
     
     @IBAction func cleanMeme(_ sender: Any) {
         
@@ -134,10 +127,10 @@ UINavigationControllerDelegate{
     
     private func back() {
         
-         self.navigationController?.popToRootViewController(animated: true)
+        performSegue(withIdentifier: "back", sender: nil)
+        
     }
     
-
     @IBAction func pickOrChoosePhoto(_ sender: UIButton) {
         
         if sender.tag == 0{
@@ -159,7 +152,7 @@ UINavigationControllerDelegate{
         controller.completionWithItemsHandler = {(activityType: UIActivityType?, completed: Bool, returnedItems: [Any]?, error: Error?) in
             if completed {
                 
-                if(self.memeToEdit == nil){
+                if self.memeToEdit == nil {
                     self.save(meme: meme)
                 } else {
                     let object = UIApplication.shared.delegate

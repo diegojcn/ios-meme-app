@@ -22,11 +22,16 @@ class MemeTableViewController : UITableViewController {
         
         tableView.reloadData()
     }
+    @IBAction func newMeme(_ sender: Any) {
+        
+        print("NewMeme")
+    }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "editSegue" {
-            let controller = segue.destination as! MemeViewController
+        if segue.identifier == "viewSegue" {
+        
+            let controller = segue.destination as! MemeDetailViewController
             controller.memeToEdit = self.memeSelected
             
         }
@@ -39,7 +44,7 @@ extension MemeTableViewController {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         self.memeSelected = self.memes[(indexPath as NSIndexPath).row]
-        performSegue(withIdentifier: "editSegue", sender: nil)
+        performSegue(withIdentifier: "viewSegue", sender: nil)
         
     }
     

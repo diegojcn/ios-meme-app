@@ -47,17 +47,17 @@ class MemeView : UIView, UITextFieldDelegate{
         let paragraph = NSMutableParagraphStyle()
         paragraph.alignment = .center
         
-        let memeTextAttributes = [
+        let attributes = [
             NSAttributedStringKey.strokeColor.rawValue : UIColor.black,
             NSAttributedStringKey.foregroundColor : UIColor.white,
-            NSAttributedStringKey.strokeWidth : 0,
+            NSAttributedStringKey.strokeWidth : -2,
             NSAttributedString.Key.paragraphStyle: paragraph,
             NSAttributedStringKey.font : UIFont(name: "HelveticaNeue-CondensedBlack", size: 40)!
             ] as! [String : Any]
         
-        self.topText.defaultTextAttributes = memeTextAttributes
-        self.bottomText.defaultTextAttributes = memeTextAttributes
-        
+        self.topText.defaultTextAttributes = attributes
+        self.bottomText.defaultTextAttributes = attributes
+
         if memeSelected != nil {
             
             self.imagem.image = memeSelected.originalImagem.image
@@ -66,7 +66,6 @@ class MemeView : UIView, UITextFieldDelegate{
             self.topText.text = memeSelected.topText
             showTextFields(show: true)
             showButtons(show: true)
-            editMode(edit: false)
             
         } else {
             
@@ -78,24 +77,7 @@ class MemeView : UIView, UITextFieldDelegate{
             self.memedImage = nil
             showTextFields(show: false)
             showButtons(show: false)
-            editMode(edit: true)
             
-        }
-        
-    }
-    
-    func editMode(edit : Bool) {
-        
-        if !edit {
-            self.btnEdit.isHidden = false
-            self.bottomText.isEnabled = false
-            self.topText.isEnabled = false
-            
-        } else {
-            self.btnEdit.isHidden = true
-            self.bottomText.isEnabled = true
-            self.topText.isEnabled = true
-
         }
         
     }
@@ -112,14 +94,6 @@ class MemeView : UIView, UITextFieldDelegate{
             self.trashBtn.isHidden = true
             self.cameraBtn.isHidden = false
             self.albumBtn.isHidden = false
-        }
-        
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
-
-        if (textField.text?.elementsEqual(""))! {
-           textField.text = textDefault
         }
         
     }
@@ -145,10 +119,7 @@ class MemeView : UIView, UITextFieldDelegate{
         
     }
     
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        dismissKeyboard(tag: textField.tag)
-        return true
-    }
+    
     
     func dismissKeyboard(tag : Int){
         if tag == 0 {
@@ -164,4 +135,29 @@ class MemeView : UIView, UITextFieldDelegate{
         self.bottomText.resignFirstResponder()
     }
    
+}
+
+extension MemeView {
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        let maxLength = 20
+        let currentString: NSString = textField.text! as NSString
+        let newString: NSString =
+            currentString.replacingCharacters(in: range, with: string) as NSString
+        return newString.length <= maxLength
+    }
+    
+    func textFieldDidEndEditing(_ textField: UITextField, reason: UITextFieldDidEndEditingReason) {
+        
+        if (textField.text?.elementsEqual(""))! {
+            textField.text = textDefault
+        }
+        
+    }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        dismissKeyboard(tag: textField.tag)
+        return true
+    }
+    
 }

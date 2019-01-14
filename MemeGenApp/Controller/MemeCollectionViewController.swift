@@ -25,8 +25,8 @@ class MemeCollectionViewController: UICollectionViewController{
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "editSegue" {
-            let controller = segue.destination as! MemeViewController
+        if segue.identifier == "viewSegue" {
+            let controller = segue.destination as! MemeDetailViewController
             controller.memeToEdit = self.memeSelected
             
         }
@@ -44,8 +44,7 @@ extension MemeCollectionViewController {
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         self.memeSelected = self.memes[(indexPath as NSIndexPath).row]
-        
-        performSegue(withIdentifier: "editSegue", sender: nil)
+        performSegue(withIdentifier: "viewSegue", sender: nil)
         
     }
     
